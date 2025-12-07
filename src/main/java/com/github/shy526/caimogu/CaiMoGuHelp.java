@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.shy526.App;
 import com.github.shy526.factory.OkHttpClientFactory;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 
 
+@Slf4j
 public class CaiMoGuHelp {
     public static Set<String> readResources(String fileName){
         Set<String> ids=new HashSet<>();
@@ -121,6 +123,7 @@ public class CaiMoGuHelp {
                 JSONObject jsonObject = JSON.parseObject(response.body().string());
                 Integer status = jsonObject.getInteger("status");
                 String info = jsonObject.getString("info");
+                log.error(jsonObject.toJSONString());
                 return  status ==1&&info.isEmpty();
             }
         } catch (Exception ignored) {
